@@ -19,10 +19,10 @@
               </template>
               <el-submenu index="1-1">
                 <template slot="title">商品</template>
-                <el-menu-item index="1-1-1">首页商品</el-menu-item>
+                <el-menu-item index="1-1-1" @click="goto('/nav_head/homelist')">首页商品</el-menu-item>
                 <el-menu-item index="1-1-2">详情页商品</el-menu-item>
                 <el-menu-item index="1-1-3">列表页商品</el-menu-item>
-                <el-menu-item index="1-1-4">添加</el-menu-item>
+                <el-menu-item index="1-1-4" @click="goto('/nav_head/add')">添加</el-menu-item>
               </el-submenu>
               <el-submenu index="1-2">
                 <template slot="title">用户</template>
