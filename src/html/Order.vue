@@ -1,0 +1,158 @@
+<template>
+    <div class="list">
+        <div class="button">
+            <el-button type="primary" size="small">添加</el-button>
+        </div>
+        <div class="tabellist">
+            <el-table
+                    ref="multipleTable"
+                    :data="tableData3"
+                    tooltip-effect="dark"
+                    style="width: 100%"
+                    size="mini"
+                    @selection-change="handleSelectionChange">
+                    <el-table-column
+                    type="selection"
+                    width="55">
+                    </el-table-column>
+                    <el-table-column
+                    type="index"
+                    width="50">
+                    </el-table-column>
+                    <el-table-column
+                    prop="username"
+                    label="商品名称"
+                    width="80">
+                    </el-table-column>
+                    <el-table-column
+                    prop="username"
+                    label="价格"
+                    width="80">
+                    </el-table-column>
+                    <el-table-column
+                    prop="username"
+                    label="数量"
+                    width="80">
+                    </el-table-column>
+                    <el-table-column
+                    prop="username"
+                    label="订单总额"
+                    width="120">
+                    </el-table-column>
+                    <el-table-column
+                    label="注册时间"
+                    width="120">
+                    <template slot-scope="scope">{{ scope.row.date }}</template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="200">
+                        <template slot-scope="scope">
+                            <el-button size="mini" type="danger">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+        </div>
+        <!-- 分页 -->
+             <div class="block">
+                <span class="demonstration"></span>
+                <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="currentPage3"
+                :page-size="100"
+                layout="prev, pager, next, jumper"
+                :total="1000">
+                </el-pagination>
+            </div>         
+    </div>
+</template>
+<style scoped>
+.list {
+  position: relative;
+  height: 600px;
+}
+.el-button {
+  margin: 10px 0 0 20px;
+}
+.tabellist {
+  /* margin-left: 190px; */
+  position: absolute;
+  top: 50px;
+  left: 230px;
+}
+.block {
+  position: absolute;
+  bottom: 50px;
+  right: 100px;
+}
+</style>
+<script>
+export default {
+  data() {
+    return {
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4,
+      tableData3: [
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-08",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-06",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        }
+      ],
+      multipleSelection: []
+    };
+  },
+
+  methods: {
+    toggleSelection(rows) {
+      if (rows) {
+        rows.forEach(row => {
+          this.$refs.multipleTable.toggleRowSelection(row);
+        });
+      } else {
+        this.$refs.multipleTable.clearSelection();
+      }
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    }
+  }
+};
+</script>
