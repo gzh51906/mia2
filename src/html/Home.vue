@@ -16,7 +16,7 @@
         <img class="img" src="../../public/map.jpg" />
       </el-col>
       <el-col>
-        <div style="margin:30px 53px" class="input">
+        <div style="margin:30px 53px 20px" class="input">
           <h2>操作登记</h2>
           <label>日期</label>
           <el-input v-model="form.date" placeholder="请输入内容" size="mini"></el-input>

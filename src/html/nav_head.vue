@@ -20,17 +20,18 @@
               <el-submenu index="1-1">
                 <template slot="title">商品</template>
                 <el-menu-item index="1-1-1" @click="goto('/nav_head/homelist')">首页商品</el-menu-item>
-                <el-menu-item index="1-1-2">详情页商品</el-menu-item>
-                <el-menu-item index="1-1-3">列表页商品</el-menu-item>
-                <el-menu-item index="1-1-4" @click="goto('/nav_head/add')">添加</el-menu-item>
+                <el-menu-item index="1-1-2" @click="goto('/nav_head/detaillist')">详情页商品</el-menu-item>
+                <el-menu-item index="1-1-3" @click="goto('/nav_head/list')">列表页商品</el-menu-item>
+                <el-menu-item index="1-1-4" @click="goto('/nav_head/kind')">商品分类</el-menu-item>
+                <el-menu-item index="1-1-5" @click="goto('/nav_head/add')">添加</el-menu-item>
               </el-submenu>
               <el-submenu index="1-2">
                 <template slot="title">用户</template>
-                <el-menu-item index="1-2-1">用户列表</el-menu-item>
+                <el-menu-item index="1-2-1" @click="goto('/nav_head/userslist')">用户列表</el-menu-item>
               </el-submenu>
               <el-submenu index="1-3">
                 <template slot="title">订单</template>
-                <el-menu-item index="1-3-1">用户订单</el-menu-item>
+                <el-menu-item index="1-3-1" @click="goto('/nav_head/order')">用户订单</el-menu-item>
               </el-submenu>
             </el-submenu>
             <el-menu-item index="3" @click="logout()">

@@ -13,15 +13,20 @@ import List from '../html/List.vue'
 import Add from '../html/Add.vue'
 import Userslist from '../html/Userslist.vue'
 import Order from '../html/Order.vue'
+import Detaillist from '../html/Detaillist.vue'
+import Kind from '../html/Kind.vue'
+
 let router = new VueRouter({
     routes: [
         {
+
             name: "nav_head",
             path: '/nav_head',
             component: Nav_Head,
             meta: { requireAuth: 'true' },
             children:
                 [{
+
                     name: 'home',
                     path: 'home',
                     meta: { requireAuth: 'true' },
@@ -30,6 +35,7 @@ let router = new VueRouter({
                 {
                     name: 'homelist',
                     path: 'homelist',
+                    meta: { requireAuth: 'true' },
                     component: Homelist
                 },
                 {
@@ -43,6 +49,7 @@ let router = new VueRouter({
                     path: 'add',
                     meta: { requireAuth: 'true' },
                     component: Add
+
                 },
                 {
                     name: 'userslist',
@@ -51,12 +58,24 @@ let router = new VueRouter({
                     component: Userslist
                 },
                 {
-                    name: 'Order',
-                    path: 'Order',
+                    name: 'order',
+                    path: 'order',
                     meta: { requireAuth: 'true' },
-                    component:Order
+                    component: Order
                 },
-            ]
+                {
+                    name: 'detaillist',
+                    path: 'detaillist',
+                    meta: { requireAuth: 'true' },
+                    component: Detaillist
+                }, {
+                    name: 'kind',
+                    path: 'kind',
+                    meta: { requireAuth: 'true' },
+                    component: Kind
+
+                }
+                ]
         },
         {
             name: 'login',

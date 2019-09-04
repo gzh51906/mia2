@@ -13,14 +13,13 @@
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column type="index" width="50"></el-table-column>
-        <el-table-column prop="username" label="用户名" width="100"></el-table-column>
-        <el-table-column label="注册时间" width="120">
-          <template slot-scope="scope">{{ scope.row.date }}</template>
-        </el-table-column>
-        <el-table-column prop="name" label="城市" width="120"></el-table-column>
-        <el-table-column prop="name" label="评分" width="120"></el-table-column>
+        <el-table-column prop="username" label="商品总分类" width="100"></el-table-column>
+        <el-table-column prop="username" label="商品次分类" width="100"></el-table-column>
+        <el-table-column prop="username" label="商品具体分类" width="110"></el-table-column>
+        <el-table-column prop="username" label="商品图片路径" width="350"></el-table-column>
         <el-table-column label="操作" width="200">
           <template>
+            <el-button size="mini">编辑</el-button>
             <el-button size="mini" type="danger">删除</el-button>
           </template>
         </el-table-column>
@@ -124,7 +123,7 @@ export default {
   /* margin-left: 190px; */
   position: absolute;
   top: 50px;
-  left: 250px;
+  left: 170px;
 }
 .block {
   position: absolute;

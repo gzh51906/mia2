@@ -17,7 +17,7 @@
         <el-form-item label="商品ID">
           <el-input v-model="sizeForm.id" style="width:150px" placeholder="请输入商品价格"></el-input>
         </el-form-item>
-        <el-form-item label="商品价格">
+        <el-form-item label="市场价格">
           <el-input v-model="sizeForm.price" style="width:150px" placeholder="请输入商品价格"></el-input>
         </el-form-item>
         <el-form-item label="销售价格">
