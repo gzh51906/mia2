@@ -1,93 +1,115 @@
 <template>
-  <div class="head_nav">
-    <div class="head">
+  <el-container>
+    <el-header>
       <h3>后台管理系统</h3>
       <h5>欢迎您-管理者</h5>
-    </div>
-    <el-col :span="4">
-      <el-menu default-active="2" class="el-menu-vertical-demo" active-text-color="#ffd04b">
-        <el-menu-item index="1" active="true">
-          <i class="el-icon-location"></i>
-          <span slot="title">首页</span>
-        </el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">
-            <i class="el-icon-menu"></i>
-            <span>管理数据页</span>
-          </template>
-          <el-submenu index="1-1">
-            <template slot="title">商品</template>
-            <el-menu-item index="1-1-1">首页商品</el-menu-item>
-            <el-menu-item index="1-1-2">详情页商品</el-menu-item>
-            <el-menu-item index="1-1-3">列表页商品</el-menu-item>
-            <el-menu-item index="1-1-4">添加</el-menu-item>
-          </el-submenu>
-          <el-submenu index="1-2">
-            <template slot="title">用户</template>
-            <el-menu-item index="1-2-1">用户列表</el-menu-item>
-          </el-submenu>
-          <el-submenu index="1-3">
-            <template slot="title">订单</template>
-            <el-menu-item index="1-3-1">用户订单</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="3" @click="logout()">
-          <i class="el-icon-s-custom"></i>
-          <span slot="title">退出登录</span>
-        </el-menu-item>
-      </el-menu>
-    </el-col>
-    <router-view></router-view>
-  </div>
+    </el-header>
+    <el-container>
+      <el-aside>
+        <el-col>
+          <el-menu default-active="2" class="el-menu-vertical-demo" active-text-color="#ffd04b">
+            <el-menu-item index="1" @click="goto('/nav_head/home')" class="is-active">
+              <i class="el-icon-s-home"></i>
+              <span slot="title">首页</span>
+            </el-menu-item>
+            <el-submenu index="2">
+              <template slot="title">
+                <i class="el-icon-menu"></i>
+                <span>管理数据页</span>
+              </template>
+              <el-submenu index="1-1">
+                <template slot="title">商品</template>
+                <el-menu-item index="1-1-1">首页商品</el-menu-item>
+                <el-menu-item index="1-1-2">详情页商品</el-menu-item>
+                <el-menu-item index="1-1-3">列表页商品</el-menu-item>
+                <el-menu-item index="1-1-4">添加</el-menu-item>
+              </el-submenu>
+              <el-submenu index="1-2">
+                <template slot="title">用户</template>
+                <el-menu-item index="1-2-1">用户列表</el-menu-item>
+              </el-submenu>
+              <el-submenu index="1-3">
+                <template slot="title">订单</template>
+                <el-menu-item index="1-3-1">用户订单</el-menu-item>
+              </el-submenu>
+            </el-submenu>
+            <el-menu-item index="3" @click="logout()">
+              <i class="el-icon-s-custom"></i>
+              <span slot="title">退出登录</span>
+            </el-menu-item>
+          </el-menu>
+        </el-col>
+      </el-aside>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 
 
 <script>
 export default {
+  data() {
+    return {};
+  },
   methods: {
     logout() {
       this.$store.commit("changeflag", "false");
       this.$router.push("/login");
+    },
+    goto(path) {
+      path == this.$route.path ? "return" : this.$router.push(path);
     }
   }
 };
-</script><style>
-* {
-  margin: 0;
-  padding: 0;
-}
-.head_nav .head {
-  width: 100%;
-  padding: 8px 0;
-  height: 50px;
-  line-height: 50px;
+</script>
+
+
+
+<style >
+.el-header,
+.el-footer {
+  line-height: 60px;
+  height: 60px;
   background-color: black;
   color: white;
 }
-.head_nav .head h3 {
-  font-size: 22px;
-  text-indent: 3em;
+.el-header h3 {
   float: left;
+  font-size: 22px;
 }
-.head_nav .head h5 {
+.el-header h5 {
   margin-right: 20px;
   float: right;
 }
 
-.head_nav {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-bottom: 66px;
-}
-.head_nav .el-col {
-  height: 100%;
-}
-.head_nav .el-menu {
-  height: 100%;
+.el-aside {
+  color: #333;
+  width: 250px !important;
+  line-height: 200px;
   overflow: hidden;
+  min-height: 636px;
+  border-right: solid 1px #cccccc;
 }
+
+.el-main {
+  padding: 0;
+  background-color: #eef5f9;
+  color: #333;
+}
+
+/* 
+body > .el-container {
+  margin-bottom: 40px;
+}
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+} */
 </style>
