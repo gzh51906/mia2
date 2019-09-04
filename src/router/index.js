@@ -8,6 +8,9 @@ Vue.use(VueRouter)
 import Nav_Head from '../html/nav_head.vue'
 import Home from '../html/Home.vue'
 import Login from '../html/Login.vue'
+import Homelist from '../html/Homelist.vue'
+import List from '../html/List.vue'
+import Add from '../html/Add.vue'
 let router = new VueRouter({
     routes: [
         {
@@ -21,7 +24,25 @@ let router = new VueRouter({
                     path: 'home',
                     meta: { requireAuth: 'true' },
                     component: Home
-                }]
+                },
+                {
+                    name: 'homelist',
+                    path: 'homelist',
+                    component: Homelist
+                },
+                {
+                    name: 'list',
+                    path: 'list',
+                    meta: { requireAuth: 'true' },
+                    component: List
+                },
+                {
+                    name: 'add',
+                    path: 'add',
+                    meta: { requireAuth: 'true' },
+                    component: Add
+                },
+            ]
         },
         {
             name: 'login',
