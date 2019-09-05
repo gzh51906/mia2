@@ -70,8 +70,7 @@ export default {
 
 
 <style >
-.el-header,
-.el-footer {
+.el-header {
   line-height: 60px;
   height: 60px;
   background-color: black;
@@ -91,26 +90,13 @@ export default {
   width: 250px !important;
   line-height: 200px;
   overflow: hidden;
-  min-height: 636px;
+  min-height: 690px;
   border-right: solid 1px #cccccc;
 }
 
 .el-main {
-  padding: 0;
+  padding-bottom: 40px;
   background-color: #eef5f9;
   color: #333;
 }
-
-/* 
-body > .el-container {
-  margin-bottom: 40px;
-}
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-} */
 </style>

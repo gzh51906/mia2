@@ -9,7 +9,6 @@
         :data="tableData3"
         tooltip-effect="dark"
         style="width: 100%"
-        size="normal"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
@@ -46,6 +45,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -57,21 +57,21 @@ export default {
       tableData3: [
         {
           id: 0,
-          type: "女装",
-          name: "Lee101+/EDW外套女2019新款黑色长袖印花牛仔夹克L393353YS898",
+          type: "男装",
+          name: "工作服套装男涤棉反光条耐磨工地劳保服工装夏季加油站工服焊工",
           url:
-            "/img.alicdn.com/imgextra/i4/928622636/O1CN01jAlEDE1VLKZvkOHJ2_!!928622636.jpg_60x60q90.jpg",
-          marketPrice: 669.0,
-          soldPrice: 469.0
+            "//img.alicdn.com/imgextra/i3/1657911531/O1CN01bQSkVd1NBEvrMGNOQ_!!1657911531.jpg_60x60q90.jpg",
+          marketPrice: 86.0,
+          soldPrice: 44.0
         },
         {
           id: 1,
-          type: "女装",
-          name: "LeeX-LINE女款19秋冬短款水洗薄长袖牛仔外套L345433HH8SW",
+          type: "男装",
+          name: "2019新款秋装牛仔外套男装原宿宽松潮款韩版大码男夹克纯色上衣",
           url:
-            "//img.alicdn.com/imgextra/i4/928622636/O1CN013mlDmS1VLKZWZcaZv_!!928622636.jpg_60x60q90.jpg",
-          marketPrice: 869.0,
-          soldPrice: 569.0
+            "//gd3.alicdn.com/imgextra/i3/1608180762/O1CN01XrDmvQ1HV2Lg1NpZQ_!!1608180762.jpg_50x50.jpg",
+          marketPrice: 299.0,
+          soldPrice: 99.0
         }
       ],
       multipleSelection: []
@@ -109,11 +109,11 @@ export default {
       };
       this.$router.push({
         path: "/nav_head/add",
-        query: { name: "detail", data }
+        query: { name: "list", data }
       });
     },
     deleteRow(index, rows, row) {
-      console.log(row); //当前行数据,是一个对象
+      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
     }
   }

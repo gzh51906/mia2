@@ -8,13 +8,13 @@ Vue.use(VueRouter)
 import Nav_Head from '../html/nav_head.vue'
 import Home from '../html/Home.vue'
 import Login from '../html/Login.vue'
-import Homelist from '../html/Homelist.vue'
-import List from '../html/List.vue'
 import Add from '../html/Add.vue'
+import Homelist from '../html/Homelist.vue'
+import List from '../html/Listdouble.vue'
 import Userslist from '../html/Userslist.vue'
-import Order from '../html/Order.vue'
+import Order from '../html/Orderlist.vue'
 import Detaillist from '../html/Detaillist.vue'
-import Kind from '../html/Kind.vue'
+import Kind from '../html/Kindlist.vue'
 
 let router = new VueRouter({
     routes: [

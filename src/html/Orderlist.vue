@@ -1,8 +1,5 @@
 <template>
   <div class="list">
-    <div class="button">
-      <el-button type="primary" size="small">添加</el-button>
-    </div>
     <div class="tabellist">
       <el-table
         ref="multipleTable"
@@ -13,15 +10,21 @@
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column type="index" width="50"></el-table-column>
-        <el-table-column prop="id" label="商品ID" width="80"></el-table-column>
-        <el-table-column prop="username" label="商品名称" width="200"></el-table-column>
-        <el-table-column prop="username" label="商品图片路径" width="220"></el-table-column>
-        <el-table-column prop="username" label="市场价格" width="80"></el-table-column>
-        <el-table-column prop="username" label="销售价格" width="80"></el-table-column>
-        <el-table-column label="操作" width="200">
-          <template>
-            <el-button size="mini">编辑</el-button>
-            <el-button size="mini" type="danger">删除</el-button>
+        <el-table-column prop="id" label="订单ID" width="100" align="center"></el-table-column>
+        <el-table-column prop="name" label="商品名称" width="100" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="price" label="价格" width="80" align="center"></el-table-column>
+        <el-table-column prop="number" label="数量" width="80" align="center"></el-table-column>
+        <el-table-column prop="total" label="订单总额" width="120" align="center"></el-table-column>
+        <el-table-column label="下单时间" width="120" align="center">
+          <template slot-scope="scope">{{ scope.row.date }}</template>
+        </el-table-column>
+        <el-table-column label="操作" width="200" align="center">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="danger"
+              @click="deleteRow(scope.$index, tableData3,scope.row)"
+            >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -51,39 +54,28 @@ export default {
       currentPage4: 4,
       tableData3: [
         {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          id: 0,
+          name: "三只松鼠",
+          price: "55",
+          number: "2",
+          total: "100",
+          date: "2019-09-05"
         },
         {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          id: 1,
+          name: "魔法士",
+          price: "1",
+          number: "20",
+          total: "20",
+          date: "2019-09-02"
         },
         {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-08",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-06",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-07",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          id: 2,
+          name: "华为p30Pro",
+          price: "5999",
+          number: "1",
+          total: "5999",
+          date: "2019-09-07"
         }
       ],
       multipleSelection: []
@@ -108,6 +100,10 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+    },
+    deleteRow(index, rows, row) {
+      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
+      rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
     }
   }
 };
@@ -124,7 +120,7 @@ export default {
   /* margin-left: 190px; */
   position: absolute;
   top: 50px;
-  left: 170px;
+  left: 160px;
 }
 .block {
   position: absolute;

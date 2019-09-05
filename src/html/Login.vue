@@ -63,7 +63,7 @@ export default {
 .login {
   width: 400px;
   padding: 40px 40px 80px 25px;
-  margin: auto;
+  margin: 100px auto;
   border: 1px solid #dddddd;
   background: #cccccc;
   text-align: center;

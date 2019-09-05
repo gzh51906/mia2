@@ -13,7 +13,7 @@
           <p class="newadd" v-for="(item,index) in list1" :key="index+'1'">{{item.key}}</p>
         </div>
         <span class="sp1">营销范围</span>
-        <img class="img" src="../../public/map.jpg" />
+        <img class="img" src="../assets/map.jpg" />
       </el-col>
       <el-col>
         <div style="margin:30px 53px 20px" class="input">
@@ -38,12 +38,6 @@
               <el-table-column prop="content" label="操作内容"></el-table-column>
             </el-table>
           </template>
-        </div>
-      </el-col>
-    </el-row>
-  </div>
-</template>
-
         </div>
       </el-col>
     </el-row>
@@ -112,6 +106,9 @@ export default {
           content: this.form.content
         };
         this.tableData.push(form);
+        this.form.date = "";
+        this.form.name = "";
+        this.form.content = "";
       }
     }
   }

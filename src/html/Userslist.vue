@@ -1,8 +1,5 @@
 <template>
   <div class="list">
-    <div class="button">
-      <el-button type="primary" size="small">添加</el-button>
-    </div>
     <div class="tabellist">
       <el-table
         ref="multipleTable"
@@ -13,15 +10,19 @@
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column type="index" width="50"></el-table-column>
-        <el-table-column prop="username" label="用户名" width="100"></el-table-column>
-        <el-table-column label="注册时间" width="120">
+        <el-table-column prop="name" label="用户名" width="100" align="center"></el-table-column>
+        <el-table-column label="注册时间" width="150" align="center">
           <template slot-scope="scope">{{ scope.row.date }}</template>
         </el-table-column>
-        <el-table-column prop="name" label="城市" width="120"></el-table-column>
-        <el-table-column prop="name" label="评分" width="120"></el-table-column>
-        <el-table-column label="操作" width="200">
-          <template>
-            <el-button size="mini" type="danger">删除</el-button>
+        <el-table-column prop="city" label="城市" width="130" align="center"></el-table-column>
+        <el-table-column prop="score" label="评分" width="130" align="center"></el-table-column>
+        <el-table-column label="操作" width="200" align="center">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="danger"
+              @click="deleteRow(scope.$index, tableData3,scope.row)"
+            >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -53,37 +54,20 @@ export default {
         {
           date: "2016-05-03",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          city: "广州",
+          score: "98"
         },
         {
           date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          name: "王大虎",
+          city: "深圳",
+          score: "100"
         },
         {
           date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-08",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-06",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-07",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          name: "王虎虎",
+          city: "长沙",
+          score: "60"
         }
       ],
       multipleSelection: []
@@ -108,6 +92,10 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+    },
+    deleteRow(index, rows, row) {
+      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
+      rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
     }
   }
 };
@@ -125,6 +113,7 @@ export default {
   position: absolute;
   top: 50px;
   left: 250px;
+  box-sizing: border-box;
 }
 .block {
   position: absolute;

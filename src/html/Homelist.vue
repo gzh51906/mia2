@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <div class="button">
-      <el-button type="primary" size="small">添加</el-button>
+      <el-button type="primary" size="small" @click="handleClick()">添加</el-button>
     </div>
     <div class="tabellist">
       <el-table
@@ -14,15 +14,20 @@
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column type="index" width="50"></el-table-column>
-        <el-table-column prop="id" label="商品ID" width="80"></el-table-column>
-        <el-table-column prop="name" label="商品名称" width="120"></el-table-column>
+        <el-table-column prop="id" label="商品ID" width="80" align="center"></el-table-column>
+        <el-table-column prop="type" label="分类" width="90" align="center"></el-table-column>
+        <el-table-column prop="name" label="商品名称" width="200" show-overflow-tooltip></el-table-column>
         <el-table-column prop="url" label="商品图片路径" width="220" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="name" label="市场价格" width="120"></el-table-column>
-        <el-table-column prop="name" label="销售价格" width="120"></el-table-column>
-        <el-table-column label="操作" width="200">
-          <template>
-            <el-button size="mini">编辑</el-button>
-            <el-button size="mini" type="danger">删除</el-button>
+        <el-table-column prop="marketPrice" label="市场价格" width="90" align="center"></el-table-column>
+        <el-table-column prop="soldPrice" label="销售价格" width="90" align="center"></el-table-column>
+        <el-table-column label="操作" width="180" align="center">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="handleClick(scope.row)">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="deleteRow(scope.$index, tableData3,scope.row)"
+            >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -51,39 +56,22 @@ export default {
       currentPage4: 4,
       tableData3: [
         {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          id: 0,
+          type: "女装",
+          name: "LeeX-LINE女款19秋冬短款水洗薄长袖牛仔外套L345433HH8SW",
+          url:
+            "//img.alicdn.com/imgextra/i4/928622636/O1CN013mlDmS1VLKZWZcaZv_!!928622636.jpg_60x60q90.jpg",
+          marketPrice: 869.0,
+          soldPrice: 569.0
         },
         {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-08",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-06",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-07",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          id: 1,
+          type: "女装",
+          name: "Lee101+/EDW外套女2019新款黑色长袖印花牛仔夹克L393353YS898",
+          url:
+            "/img.alicdn.com/imgextra/i4/928622636/O1CN01jAlEDE1VLKZvkOHJ2_!!928622636.jpg_60x60q90.jpg",
+          marketPrice: 669.0,
+          soldPrice: 469.0
         }
       ],
       multipleSelection: []
@@ -108,6 +96,25 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+    },
+    handleClick(row = {}) {
+      //row当前行数据,是一个对象,跳转到添加页，把数据带过去
+      let data = {
+        id: row.id,
+        type: row.type,
+        name: row.name,
+        url: row.url,
+        marketPrice: row.marketPrice,
+        soldPrice: row.soldPrice
+      };
+      this.$router.push({
+        path: "/nav_head/add",
+        query: { name: "home", data }
+      });
+    },
+    deleteRow(index, rows, row) {
+      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
+      rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
     }
   }
 };
@@ -124,7 +131,7 @@ export default {
   /* margin-left: 190px; */
   position: absolute;
   top: 50px;
-  left: 170px;
+  left: 130px;
 }
 .block {
   position: absolute;
