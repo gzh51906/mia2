@@ -63,8 +63,10 @@
           </el-col>
         </el-form-item>
       </el-form>
+
       <div class="button">
-        <el-button type="primary" size="small">提交</el-button>
+        <el-button type="primary" size="small" @click="onSubmit()" style="margin-left:35px">提交</el-button>
+        <el-button size="small" @click="goback()" v-show="this.$route.query.data">返回</el-button>
       </div>
     </div>
   </div>
@@ -116,7 +118,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      // console.log("submit!");
+      console.log("这是一个提交按钮");
+    },
+    goback() {
+      //返回上一个页面
+      if (this.$route.query.data) {
+        this.$router.go(-1);
+      }
     }
   }
 };

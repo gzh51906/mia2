@@ -12,7 +12,7 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column type="index" width="50"></el-table-column>
+        <!-- <el-table-column type="index" width="50"></el-table-column> -->
         <el-table-column prop="id" label="商品ID" width="80"></el-table-column>
         <el-table-column prop="name" label="商品总分类" width="130"></el-table-column>
         <el-table-column prop="title" label="商品次分类" width="130"></el-table-column>

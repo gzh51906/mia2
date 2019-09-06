@@ -9,7 +9,7 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column type="index" width="50"></el-table-column>
+        <!-- <el-table-column type="index" width="50"></el-table-column> -->
         <el-table-column prop="id" label="订单ID" width="100" align="center"></el-table-column>
         <el-table-column prop="name" label="商品名称" width="100" show-overflow-tooltip></el-table-column>
         <el-table-column prop="price" label="价格" width="80" align="center"></el-table-column>
@@ -120,7 +120,7 @@ export default {
   /* margin-left: 190px; */
   position: absolute;
   top: 50px;
-  left: 160px;
+  left: 210px;
 }
 .block {
   position: absolute;

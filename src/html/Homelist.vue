@@ -13,7 +13,7 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column type="index" width="50"></el-table-column>
+        <!-- <el-table-column type="index" width="50"></el-table-column> -->
         <el-table-column prop="id" label="商品ID" width="80" align="center"></el-table-column>
         <el-table-column prop="type" label="分类" width="90" align="center"></el-table-column>
         <el-table-column prop="name" label="商品名称" width="200" show-overflow-tooltip></el-table-column>
@@ -38,10 +38,9 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page.sync="currentPage3"
-        :page-size="100"
+        :page-size="7"
         layout="prev, pager, next, jumper"
-        :total="1000"
+        :total="70"
       ></el-pagination>
     </div>
   </div>
@@ -50,10 +49,6 @@
 export default {
   data() {
     return {
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
       tableData3: [
         {
           id: 0,
@@ -89,13 +84,16 @@ export default {
       }
     },
     handleSelectionChange(val) {
+      //执行页面的改变
       this.multipleSelection = val;
     },
     handleSizeChange(val) {
+      //每个页面可有多少条数据
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+      //监听页面的改变
+      console.log(`当前页: ${val}`); //页面改变，发送请求写在这里
     },
     handleClick(row = {}) {
       //row当前行数据,是一个对象,跳转到添加页，把数据带过去
@@ -113,9 +111,15 @@ export default {
       });
     },
     deleteRow(index, rows, row) {
-      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
+      console.log(row.id); //当前行数据,有id等值以此可以删除数据库的东西
     }
+  },
+  created() {
+    console.log("发起请求");
+  },
+  destroyed() {
+    console.log("取消请求");
   }
 };
 </script>
