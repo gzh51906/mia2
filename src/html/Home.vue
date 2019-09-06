@@ -2,15 +2,29 @@
   <div class="home">
     <div class="head-home" @click="name()">首页</div>
     <el-row>
-      <el-col v-for="(item,index) in list" :key="index" :offset="item.offset" :span="6">
-        <div :class="item.class1">
-          <i :class="item.class2"></i>
-          {{item.content}}
+      <el-col :offset="1" :span="6">
+        <div class="grid-content bg-purple">
+          <i class="el-icon-s-custom"></i>
+          用户量：{{user}}
+        </div>
+      </el-col>
+      <el-col :offset="2" :span="6">
+        <div class="grid-content bg-purple-light">
+          <i class="el-icon-coin"></i>
+          订单总数：{{order}}
+        </div>
+      </el-col>
+      <el-col :offset="2" :span="6">
+        <div class="grid-content bg-purple">
+          <i class="el-icon-shopping-bag-1"></i>
+          商品种类： {{type}}
         </div>
       </el-col>
       <el-col>
         <div style="float:left;margin-left:53px">
-          <p class="newadd" v-for="(item,index) in list1" :key="index+'1'">{{item.key}}</p>
+          <p class="newadd">新增用户:{{newuser}}</p>
+          <p class="newadd">新增订单:{{neworder}}</p>
+          <p class="newadd">新增商品种类:{{newtype}}</p>
         </div>
         <span class="sp1">营销范围</span>
         <img class="img" src="../assets/map.jpg" />
@@ -49,36 +63,17 @@ export default {
   data() {
     return {
       name: "home",
+      user: "",
+      order: "",
+      type: "",
+      newuser: "",
+      neworder: "",
+      newtype: "",
       form: {
         name: "",
         date: "",
         content: ""
       },
-      list: [
-        {
-          offset: 1,
-          class1: "grid-content bg-purple",
-          class2: "el-icon-s-custom",
-          content: "用户量："
-        },
-        {
-          offset: 2,
-          class1: "grid-content bg-purple-light",
-          class2: "el-icon-coin",
-          content: "订单总金额："
-        },
-        {
-          offset: 2,
-          class1: "grid-content bg-purple",
-          class2: "el-icon-shopping-bag-1",
-          content: "商品种类："
-        }
-      ],
-      list1: [
-        { key: "新增用户：" },
-        { key: "新增订单金额：" },
-        { key: "新增商品种类：" }
-      ],
       tableData: [
         {
           date: "2016-05-02",
@@ -110,7 +105,25 @@ export default {
         this.form.name = "";
         this.form.content = "";
       }
+    },
+    async getData() {
+      let result = await this.$home({ methods: "get" });
+      this.user = result.data[0][0].user;
+      this.newuser = result.data[3][0].newuser;
+
+      this.order = result.data[1][0].order;
+      this.neworder = result.data[4][0].neworder;
+
+      this.type = result.data[2][0].type;
+      result.data[5][0].oldtype;
+      this.newtype = result.data[2][0].type - result.data[5][0].oldtype;
     }
+  },
+  created() {
+    this.getData(); //发起请求
+  },
+  destroyed() {
+    console.log("暂且无取消请求功能");
   }
 };
 </script>

@@ -10,10 +10,7 @@
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column type="index" width="50"></el-table-column>
-        <el-table-column prop="name" label="用户名" width="100" align="center"></el-table-column>
-        <el-table-column label="注册时间" width="150" align="center">
-          <template slot-scope="scope">{{ scope.row.date }}</template>
-        </el-table-column>
+        <el-table-column prop="username" label="用户名" width="100" align="center"></el-table-column>
         <el-table-column prop="city" label="城市" width="130" align="center"></el-table-column>
         <el-table-column prop="score" label="评分" width="130" align="center"></el-table-column>
         <el-table-column label="操作" width="200" align="center">
@@ -34,9 +31,9 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage3"
-        :page-size="100"
+        :page-size="7"
         layout="prev, pager, next, jumper"
-        :total="1000"
+        :total="total"
       ></el-pagination>
     </div>
   </div>
@@ -50,26 +47,8 @@ export default {
       currentPage2: 5,
       currentPage3: 5,
       currentPage4: 4,
-      tableData3: [
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          city: "广州",
-          score: "98"
-        },
-        {
-          date: "2016-05-02",
-          name: "王大虎",
-          city: "深圳",
-          score: "100"
-        },
-        {
-          date: "2016-05-04",
-          name: "王虎虎",
-          city: "长沙",
-          score: "60"
-        }
-      ],
+      tableData3: [],
+      total: null,
       multipleSelection: []
     };
   },
@@ -88,15 +67,28 @@ export default {
       this.multipleSelection = val;
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      // console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    async handleCurrentChange(val) {
+      let res = await this.$user({ methods: "get", params: { number: val } });
+      this.tableData3 = res.data[0];
+      this.total = res.data[1][0].user;
+      // console.log(res.data);
     },
     deleteRow(index, rows, row) {
-      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
+      console.log(row.username);
+      this.$user.delete("http://localhost:1906/user", {
+        params: { username: row.username }
+      });
+      // this.$user({
+      //   methods: "delete",
+      //   params: { username: row.username }
+      // });不知道什么原因不可以
     }
+  },
+  created() {
+    this.handleCurrentChange(1);
   }
 };
 </script>
