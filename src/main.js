@@ -12,8 +12,16 @@ const home = axios.create({  //私人订制
 const user = axios.create({  //私人订制
   baseURL: 'http://localhost:1906/user'
 });
+const order = axios.create({  //私人订制
+  baseURL: 'http://localhost:1906/order'
+});
+const list = axios.create({  //私人订制
+  baseURL: 'http://localhost:1906/list'
+});
 Vue.prototype.$home = home;
 Vue.prototype.$user = user;
+Vue.prototype.$order = order;
+Vue.prototype.$list = list;
 
 
 Vue.config.productionTip = false

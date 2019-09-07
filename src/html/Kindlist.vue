@@ -37,9 +37,9 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage3"
-        :page-size="100"
+        :page-size="7"
         layout="prev, pager, next, jumper"
-        :total="1000"
+        :total="total"
       ></el-pagination>
     </div>
   </div>
@@ -53,32 +53,8 @@ export default {
       currentPage2: 5,
       currentPage3: 5,
       currentPage4: 4,
-      tableData3: [
-        {
-          id: "0",
-          name: "数码产品",
-          title: "单反",
-          type: "尼康",
-          url:
-            "https://img01.miyabaobei.com/d1/p5/2018/09/25/cc/88/cc88ed2e69599690f11f9aafb5c00e35691177022.jpg"
-        },
-        {
-          id: "1",
-          name: "数码产品",
-          title: "手机",
-          type: "华为",
-          url:
-            "https://img02.miyabaobei.com/d1/p5/2018/09/25/cc/88/54f5s4dfsdfsdf456sd4f56sf4s5f4s5df4dcsd2.jpg"
-        },
-        {
-          id: "2",
-          name: "家用电器",
-          title: "微波炉",
-          type: "未知",
-          url:
-            "https://img03.miyabaobei.com/d1/p5/2018/09/55/cc/84/cc8d5d5df5fdsdfhr8e81vd95f45sdfs55sd691177022.jpg"
-        }
-      ],
+      total: null,
+      tableData3: [],
       multipleSelection: []
     };
   },
@@ -99,8 +75,14 @@ export default {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    async handleCurrentChange(val) {
+      //监听页面的改变
+      let res = await this.$list({
+        method: "get",
+        params: { number: val, type: "kind" }
+      });
+      this.tableData3 = res.data[0];
+      this.total = res.data[1][0].kind;
     },
     handleClick(row = {}) {
       //row当前行数据,是一个对象,跳转到添加页，把数据带过去
@@ -117,9 +99,18 @@ export default {
       });
     },
     deleteRow(index, rows, row) {
-      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
+      this.$list({
+        method: "delete",
+        params: { id: row.id, type: "kind" }
+      });
     }
+  },
+  created() {
+    this.handleCurrentChange(1);
+  },
+  destroyed() {
+    console.log("kindlist暂无取消请求功能");
   }
 };
 </script>

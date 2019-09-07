@@ -4,13 +4,25 @@
     <div class="addlist">
       <el-form ref="form" :model="sizeForm" label-width="100px">
         <el-form-item label="商品名称">
-          <el-input v-model="sizeForm.name" placeholder="请输入商品名称或商品总分类">{{sizeForm.name}}</el-input>
+          <el-input
+            v-model="sizeForm.name"
+            placeholder="请输入商品名称或商品总分类"
+            style="width:500px"
+          >{{sizeForm.name}}</el-input>
         </el-form-item>
         <el-form-item label="商品标题">
-          <el-input v-model="sizeForm.title" placeholder="请输入商品标题或商品次分类">{{sizeForm.title}}</el-input>
+          <el-input
+            v-model="sizeForm.title"
+            placeholder="请输入商品标题或商品次分类"
+            style="width:500px"
+          >{{sizeForm.title}}</el-input>
         </el-form-item>
         <el-form-item label="商品图片路径">
-          <el-input v-model="sizeForm.url" placeholder="请输入商品图片路径">{{sizeForm.url}}</el-input>
+          <el-input
+            v-model="sizeForm.url"
+            placeholder="请输入商品图片路径"
+            style="width:500px"
+          >{{sizeForm.url}}</el-input>
         </el-form-item>
         <el-form-item label="商品分类">
           <el-input
@@ -36,31 +48,19 @@
             placeholder="请输入销售价格"
           >{{sizeForm.soldPrice}}</el-input>
         </el-form-item>
-        <el-form-item label="库存">
+        <!-- <el-form-item label="库存">
           <el-input
             v-model="sizeForm.kucun"
             style="width:150px"
             placeholder="请输入库存数量"
           >{{sizeForm.kucun}}</el-input>
-        </el-form-item>
-        <el-form-item label="活动时间">
-          <el-col :span="11">
-            <el-date-picker
-              type="date"
-              placeholder="选择日期"
-              v-model="sizeForm.date1"
-              style="width: 100%;"
-            ></el-date-picker>
-          </el-col>
-          <el-col class="line" :span="2">-</el-col>
-          <el-col :span="11">
-            <el-time-picker
-              type="fixed-time"
-              placeholder="选择时间"
-              v-model="sizeForm.date2"
-              style="width: 100%;"
-            ></el-time-picker>
-          </el-col>
+        </el-form-item>-->
+        <el-form-item label="时间">
+          <el-input
+            v-model="sizeForm.time"
+            style="width:150px"
+            placeholder="添加商品分类必写"
+          >{{sizeForm.time}}</el-input>
         </el-form-item>
       </el-form>
 
@@ -87,8 +87,7 @@ export default {
           soldPrice: this.$route.query.data.soldPrice,
           id: this.$route.query.data.id,
           kucun: "",
-          date1: "",
-          date2: "",
+          time: "",
           delivery: false,
           resource: "",
           desc: ""
@@ -106,13 +105,12 @@ export default {
           soldPrice: "",
           id: "",
           kucun: "",
-          date1: "",
-          date2: "",
+          time: "",
           delivery: false,
           resource: "",
           desc: ""
         },
-        text: "add"
+        text: ""
       };
     }
   },
@@ -126,6 +124,12 @@ export default {
         this.$router.go(-1);
       }
     }
+  },
+  created() {
+    console.log(this.$route.query);
+  },
+  destroyed() {
+    console.log("add无取消响应");
   }
 };
 </script>

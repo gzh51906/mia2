@@ -36,9 +36,9 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage3"
-        :page-size="100"
+        :page-size="7"
         layout="prev, pager, next, jumper"
-        :total="1000"
+        :total="total"
       ></el-pagination>
     </div>
   </div>
@@ -52,32 +52,8 @@ export default {
       currentPage2: 5,
       currentPage3: 5,
       currentPage4: 4,
-      tableData3: [
-        {
-          id: 0,
-          name: "三只松鼠",
-          price: "55",
-          number: "2",
-          total: "100",
-          date: "2019-09-05"
-        },
-        {
-          id: 1,
-          name: "魔法士",
-          price: "1",
-          number: "20",
-          total: "20",
-          date: "2019-09-02"
-        },
-        {
-          id: 2,
-          name: "华为p30Pro",
-          price: "5999",
-          number: "1",
-          total: "5999",
-          date: "2019-09-07"
-        }
-      ],
+      tableData3: [],
+      total: null,
       multipleSelection: []
     };
   },
@@ -98,13 +74,27 @@ export default {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    async handleCurrentChange(val) {
+      let res = await this.$order({
+        method: "get",
+        params: { number: val }
+      });
+      this.tableData3 = res.data[0];
+      this.total = res.data[1][0].order;
     },
     deleteRow(index, rows, row) {
-      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
+      this.$order({
+        method: "delete",
+        params: { id: row.id }
+      });
     }
+  },
+  created() {
+    this.handleCurrentChange(1);
+  },
+  destroyed() {
+    console.log("订单列表暂无取消请求功能");
   }
 };
 </script>

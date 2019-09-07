@@ -39,9 +39,9 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage3"
-        :page-size="100"
+        :page-size="7"
         layout="prev, pager, next, jumper"
-        :total="1000"
+        :total="total"
       ></el-pagination>
     </div>
   </div>
@@ -54,26 +54,8 @@ export default {
       currentPage2: 5,
       currentPage3: 5,
       currentPage4: 4,
-      tableData3: [
-        {
-          id: 0,
-          type: "女装",
-          name: "Lee101+/EDW外套女2019新款黑色长袖印花牛仔夹克L393353YS898",
-          url:
-            "/img.alicdn.com/imgextra/i4/928622636/O1CN01jAlEDE1VLKZvkOHJ2_!!928622636.jpg_60x60q90.jpg",
-          marketPrice: 669.0,
-          soldPrice: 469.0
-        },
-        {
-          id: 1,
-          type: "女装",
-          name: "LeeX-LINE女款19秋冬短款水洗薄长袖牛仔外套L345433HH8SW",
-          url:
-            "//img.alicdn.com/imgextra/i4/928622636/O1CN013mlDmS1VLKZWZcaZv_!!928622636.jpg_60x60q90.jpg",
-          marketPrice: 869.0,
-          soldPrice: 569.0
-        }
-      ],
+      total: null,
+      tableData3: [],
       multipleSelection: []
     };
   },
@@ -94,8 +76,14 @@ export default {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    async handleCurrentChange(val) {
+      //监听页面的改变
+      let res = await this.$list({
+        method: "get",
+        params: { number: val, type: "detail" }
+      });
+      this.tableData3 = res.data[0];
+      this.total = res.data[1][0].detail;
     },
     handleClick(row = {}) {
       //row当前行数据,是一个对象,跳转到添加页，把数据带过去
@@ -113,9 +101,18 @@ export default {
       });
     },
     deleteRow(index, rows, row) {
-      console.log(row); //当前行数据,是一个对象
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
+      this.$list({
+        method: "delete",
+        params: { id: row.id, type: "detail" }
+      });
     }
+  },
+  created() {
+    this.handleCurrentChange(1);
+  },
+  destroyed() {
+    console.log("detaillist暂无取消请求功能");
   }
 };
 </script>

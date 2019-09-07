@@ -12,6 +12,9 @@
         <el-table-column type="index" width="50"></el-table-column>
         <el-table-column prop="username" label="用户名" width="100" align="center"></el-table-column>
         <el-table-column prop="city" label="城市" width="130" align="center"></el-table-column>
+        <el-table-column label="注册时间" width="120" align="center">
+          <template slot-scope="scope">{{ scope.row.date }}</template>
+        </el-table-column>
         <el-table-column prop="score" label="评分" width="130" align="center"></el-table-column>
         <el-table-column label="操作" width="200" align="center">
           <template slot-scope="scope">
@@ -70,25 +73,22 @@ export default {
       // console.log(`每页 ${val} 条`);
     },
     async handleCurrentChange(val) {
-      let res = await this.$user({ methods: "get", params: { number: val } });
+      //改变页数的时候就发一次请求
+      let res = await this.$user({ method: "get", params: { number: val } }); //发送请求得到数据
       this.tableData3 = res.data[0];
       this.total = res.data[1][0].user;
       // console.log(res.data);
     },
     deleteRow(index, rows, row) {
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
-      console.log(row.username);
-      this.$user.delete("http://localhost:1906/user", {
-        params: { username: row.username }
-      });
-      // this.$user({
-      //   methods: "delete",
-      //   params: { username: row.username }
-      // });不知道什么原因不可以
+      this.$user({ method: "delete", params: { username: row.username } }); //发送请求,删除数据
     }
   },
   created() {
     this.handleCurrentChange(1);
+  },
+  destroyed() {
+    console.log("用户列表暂无取消请求功能");
   }
 };
 </script>

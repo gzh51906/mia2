@@ -38,9 +38,9 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage3"
-        :page-size="100"
+        :page-size="7"
         layout="prev, pager, next, jumper"
-        :total="1000"
+        :total="total"
       ></el-pagination>
     </div>
   </div>
@@ -54,26 +54,8 @@ export default {
       currentPage2: 5,
       currentPage3: 5,
       currentPage4: 4,
-      tableData3: [
-        {
-          id: 0,
-          type: "男装",
-          name: "工作服套装男涤棉反光条耐磨工地劳保服工装夏季加油站工服焊工",
-          url:
-            "//img.alicdn.com/imgextra/i3/1657911531/O1CN01bQSkVd1NBEvrMGNOQ_!!1657911531.jpg_60x60q90.jpg",
-          marketPrice: 86.0,
-          soldPrice: 44.0
-        },
-        {
-          id: 1,
-          type: "男装",
-          name: "2019新款秋装牛仔外套男装原宿宽松潮款韩版大码男夹克纯色上衣",
-          url:
-            "//gd3.alicdn.com/imgextra/i3/1608180762/O1CN01XrDmvQ1HV2Lg1NpZQ_!!1608180762.jpg_50x50.jpg",
-          marketPrice: 299.0,
-          soldPrice: 99.0
-        }
-      ],
+      total: null,
+      tableData3: [],
       multipleSelection: []
     };
   },
@@ -94,8 +76,14 @@ export default {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    async handleCurrentChange(val) {
+      //监听页面的改变
+      let res = await this.$list({
+        method: "get",
+        params: { number: val, type: "list" }
+      });
+      this.tableData3 = res.data[0];
+      this.total = res.data[1][0].list;
     },
     handleClick(row = {}) {
       //row当前行数据,是一个对象,跳转到添加页，把数据带过去
@@ -113,9 +101,18 @@ export default {
       });
     },
     deleteRow(index, rows, row) {
-      console.log(row); //当前行数据,是一个对象,有id等值以此可以删除数据库的东西
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
+      this.$list({
+        method: "delete",
+        params: { id: row.id, type: "list" }
+      });
     }
+  },
+  created() {
+    this.handleCurrentChange(1);
+  },
+  destroyed() {
+    console.log("listdouble暂无取消请求功能");
   }
 };
 </script>

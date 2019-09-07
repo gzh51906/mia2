@@ -40,7 +40,7 @@
         @current-change="handleCurrentChange"
         :page-size="7"
         layout="prev, pager, next, jumper"
-        :total="70"
+        :total="total"
       ></el-pagination>
     </div>
   </div>
@@ -49,26 +49,12 @@
 export default {
   data() {
     return {
-      tableData3: [
-        {
-          id: 0,
-          type: "女装",
-          name: "LeeX-LINE女款19秋冬短款水洗薄长袖牛仔外套L345433HH8SW",
-          url:
-            "//img.alicdn.com/imgextra/i4/928622636/O1CN013mlDmS1VLKZWZcaZv_!!928622636.jpg_60x60q90.jpg",
-          marketPrice: 869.0,
-          soldPrice: 569.0
-        },
-        {
-          id: 1,
-          type: "女装",
-          name: "Lee101+/EDW外套女2019新款黑色长袖印花牛仔夹克L393353YS898",
-          url:
-            "/img.alicdn.com/imgextra/i4/928622636/O1CN01jAlEDE1VLKZvkOHJ2_!!928622636.jpg_60x60q90.jpg",
-          marketPrice: 669.0,
-          soldPrice: 469.0
-        }
-      ],
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4,
+      total: null,
+      tableData3: [],
       multipleSelection: []
     };
   },
@@ -91,9 +77,14 @@ export default {
       //每个页面可有多少条数据
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
+    async handleCurrentChange(val) {
       //监听页面的改变
-      console.log(`当前页: ${val}`); //页面改变，发送请求写在这里
+      let res = await this.$list({
+        method: "get",
+        params: { number: val, type: "home" }
+      });
+      this.tableData3 = res.data[0];
+      this.total = res.data[1][0].home;
     },
     handleClick(row = {}) {
       //row当前行数据,是一个对象,跳转到添加页，把数据带过去
@@ -112,14 +103,17 @@ export default {
     },
     deleteRow(index, rows, row) {
       rows.splice(index, 1); //删除当前行 index索引值 rows 所有的数据 row 当前行数据
-      console.log(row.id); //当前行数据,有id等值以此可以删除数据库的东西
+      this.$list({
+        method: "delete",
+        params: { id: row.id, type: "home" }
+      });
     }
   },
   created() {
-    console.log("发起请求");
+    this.handleCurrentChange(1);
   },
   destroyed() {
-    console.log("取消请求");
+    console.log("homelist暂无取消请求功能");
   }
 };
 </script>

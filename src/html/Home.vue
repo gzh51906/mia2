@@ -107,7 +107,7 @@ export default {
       }
     },
     async getData() {
-      let result = await this.$home({ methods: "get" });
+      let result = await this.$home({ methods: "get" }); //发起请求
       this.user = result.data[0][0].user;
       this.newuser = result.data[3][0].newuser;
 
@@ -123,7 +123,7 @@ export default {
     this.getData(); //发起请求
   },
   destroyed() {
-    console.log("暂且无取消请求功能");
+    console.log("主页暂且无取消请求功能");
   }
 };
 </script>
