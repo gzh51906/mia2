@@ -57,8 +57,12 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.commit("changeflag", "false");
-      // this.$login({ method: "patch", body: { status: false } });
+      // this.$store.commit("changeflag", "false");
+      this.$login({
+        //设置登陆状态为0
+        method: "patch",
+        data: { status: 0 }
+      });
       this.$router.push("/login");
     },
     goto(path) {

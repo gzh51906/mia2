@@ -119,7 +119,7 @@ export default {
       this.newtype = result.data[2][0].type - result.data[5][0].oldtype;
     }
   },
-  created() {
+  async created() {
     this.getData(); //发起请求
   },
   destroyed() {

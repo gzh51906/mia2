@@ -22,14 +22,17 @@ const list = axios.create({  //私人订制
 const add = axios.create({  //私人订制
   baseURL: 'http://localhost:1906/add'
 });
+const login = axios.create({  //私人订制
+  baseURL: 'http://localhost:1906/login'
+});
+
 
 Vue.prototype.$home = home;
 Vue.prototype.$user = user;
 Vue.prototype.$order = order;
 Vue.prototype.$list = list;
 Vue.prototype.$add = add;
-
-
+Vue.prototype.$login = login;
 
 Vue.config.productionTip = false
 

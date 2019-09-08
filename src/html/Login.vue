@@ -52,7 +52,12 @@ export default {
         return;
       }
 
-      this.$store.commit("changeflag", "true");
+      // this.$store.commit("changeflag", "true");
+      this.$login({
+        //设置登陆状态为1
+        method: "patch",
+        data: { status: 1 }
+      });
       this.$router.push("/nav_head/home");
     }
   }

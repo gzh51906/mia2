@@ -15,6 +15,7 @@ import Userslist from '../html/Userslist.vue'
 import Order from '../html/Orderlist.vue'
 import Detaillist from '../html/Detaillist.vue'
 import Kind from '../html/Kindlist.vue'
+import { async } from 'q';
 
 let router = new VueRouter({
     routes: [
@@ -87,9 +88,10 @@ let router = new VueRouter({
         }]
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {  //路由拦截，没登陆不让进页面,连接数据库判断的
     if (to.meta.requireAuth) {
-        if (Vue.prototype.$store.state.flag != 'true') {
+        let res = await Vue.prototype.$login({ method: 'get' });
+        if (res.data[0].status != "1") {
             next({ path: '/login' });
         } else {
             next();
