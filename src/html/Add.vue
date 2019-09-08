@@ -2,27 +2,9 @@
   <div class="add">
     <h3>from:{{text}}</h3>
     <div class="addlist">
-      <el-form ref="form" :model="sizeForm" label-width="100px">
-        <el-form-item label="商品名称">
-          <el-input
-            v-model="sizeForm.name"
-            placeholder="请输入商品名称或商品总分类"
-            style="width:500px"
-          >{{sizeForm.name}}</el-input>
-        </el-form-item>
-        <el-form-item label="商品标题">
-          <el-input
-            v-model="sizeForm.title"
-            placeholder="请输入商品标题或商品次分类"
-            style="width:500px"
-          >{{sizeForm.title}}</el-input>
-        </el-form-item>
-        <el-form-item label="商品图片路径">
-          <el-input
-            v-model="sizeForm.url"
-            placeholder="请输入商品图片路径"
-            style="width:500px"
-          >{{sizeForm.url}}</el-input>
+      <el-form ref="form" :model="sizeForm" label-width="120px">
+        <el-form-item label="商品ID">
+          <el-input v-model="sizeForm.id" style="width:150px" placeholder="请输入商品ID">{{sizeForm.id}}</el-input>
         </el-form-item>
         <el-form-item label="商品分类">
           <el-input
@@ -31,8 +13,19 @@
             placeholder="请输入商品分类"
           >{{sizeForm.type}}</el-input>
         </el-form-item>
-        <el-form-item label="商品ID">
-          <el-input v-model="sizeForm.id" style="width:150px" placeholder="请输入商品ID">{{sizeForm.id}}</el-input>
+        <el-form-item label="商品名称/总分类">
+          <el-input
+            v-model="sizeForm.name"
+            placeholder="请输入商品名称或商品总分类"
+            style="width:500px"
+          >{{sizeForm.name}}</el-input>
+        </el-form-item>
+        <el-form-item label="商品图片路径">
+          <el-input
+            v-model="sizeForm.url"
+            placeholder="请输入商品图片路径"
+            style="width:500px"
+          >{{sizeForm.url}}</el-input>
         </el-form-item>
         <el-form-item label="市场价格">
           <el-input
@@ -48,22 +41,29 @@
             placeholder="请输入销售价格"
           >{{sizeForm.soldPrice}}</el-input>
         </el-form-item>
-        <!-- <el-form-item label="库存">
+
+        <el-form-item label="商品次分类">
+          <el-input
+            v-model="sizeForm.title"
+            placeholder="商品次分类"
+            style="width:500px"
+          >{{sizeForm.title}}</el-input>
+        </el-form-item>
+        <el-form-item label="时间">
+          <el-input
+            v-model="sizeForm.date"
+            style="width:150px"
+            placeholder="添加商品分类必写"
+          >{{sizeForm.date}}</el-input>
+        </el-form-item>
+      </el-form>
+      <!-- <el-form-item label="库存">
           <el-input
             v-model="sizeForm.kucun"
             style="width:150px"
             placeholder="请输入库存数量"
           >{{sizeForm.kucun}}</el-input>
-        </el-form-item>-->
-        <el-form-item label="时间">
-          <el-input
-            v-model="sizeForm.time"
-            style="width:150px"
-            placeholder="添加商品分类必写"
-          >{{sizeForm.time}}</el-input>
-        </el-form-item>
-      </el-form>
-
+      </el-form-item>-->
       <div class="button">
         <el-button type="primary" size="small" @click="onSubmit()" style="margin-left:35px">提交</el-button>
         <el-button size="small" @click="goback()" v-show="this.$route.query.data">返回</el-button>
@@ -86,8 +86,8 @@ export default {
           marketPrice: this.$route.query.data.marketPrice,
           soldPrice: this.$route.query.data.soldPrice,
           id: this.$route.query.data.id,
-          kucun: "",
-          time: "",
+          // kucun: "",
+          date: this.$route.query.data.date,
           delivery: false,
           resource: "",
           desc: ""
@@ -104,19 +104,35 @@ export default {
           marketPrice: "",
           soldPrice: "",
           id: "",
-          kucun: "",
-          time: "",
+          // kucun: "",
+          date: "",
           delivery: false,
           resource: "",
           desc: ""
         },
-        text: ""
+        text: "add"
       };
     }
   },
   methods: {
     onSubmit() {
-      console.log("这是一个提交按钮");
+      if (
+        !!this.$route.query.name == true &&
+        !!this.$route.query.data.name == false
+      ) {
+        //里面写添加的代码post
+        this.$add({
+          method: "post",
+          data: { data: this.sizeForm, type: this.$route.query.name }
+        });
+      }
+      if (this.$route.query.data.name) {
+        //里面写修改的代码 patch
+        this.$add({
+          method: "patch",
+          data: { data: this.sizeForm, type: this.$route.query.name }
+        });
+      }
     },
     goback() {
       //返回上一个页面
@@ -125,11 +141,8 @@ export default {
       }
     }
   },
-  created() {
-    console.log(this.$route.query);
-  },
   destroyed() {
-    console.log("add无取消响应");
+    console.log("add无取消响应功能");
   }
 };
 </script>

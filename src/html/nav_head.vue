@@ -58,6 +58,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit("changeflag", "false");
+      // this.$login({ method: "patch", body: { status: false } });
       this.$router.push("/login");
     },
     goto(path) {

@@ -18,6 +18,7 @@
         <el-table-column prop="title" label="商品次分类" width="130"></el-table-column>
         <el-table-column prop="type" label="商品具体分类" width="130"></el-table-column>
         <el-table-column prop="url" label="商品图片路径" width="300" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="date" label="添加时间" width="100" align="center"></el-table-column>
         <el-table-column label="操作" width="180" align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="handleClick(scope.row)">编辑</el-button>
@@ -36,7 +37,6 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page.sync="currentPage3"
         :page-size="7"
         layout="prev, pager, next, jumper"
         :total="total"
@@ -91,7 +91,8 @@ export default {
         name: row.name,
         title: row.title,
         type: row.type,
-        url: row.url
+        url: row.url,
+        date: row.date
       };
       this.$router.push({
         path: "/nav_head/add",

@@ -53,7 +53,6 @@ export default {
       }
 
       this.$store.commit("changeflag", "true");
-      //   console.log(this.$store.state.flag);
       this.$router.push("/nav_head/home");
     }
   }
