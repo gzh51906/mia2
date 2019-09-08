@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'    //请求
-import axios from 'axios'
 Vue.use(Vuex);
 
 

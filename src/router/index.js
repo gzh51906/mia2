@@ -15,7 +15,7 @@ import Userslist from '../html/Userslist.vue'
 import Order from '../html/Orderlist.vue'
 import Detaillist from '../html/Detaillist.vue'
 import Kind from '../html/Kindlist.vue'
-import { async } from 'q';
+
 
 let router = new VueRouter({
     routes: [
@@ -89,15 +89,19 @@ let router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {  //路由拦截，没登陆不让进页面,连接数据库判断的
+    let res = await Vue.prototype.$login({ method: 'get' });
     if (to.meta.requireAuth) {
-        let res = await Vue.prototype.$login({ method: 'get' });
-        if (res.data[0].status != "1") {
+        if (res.data[0].status != "1") {  //没登陆，跳到登陆页面
             next({ path: '/login' });
         } else {
             next();
         }
     }
     else {
+        if (res.data[0].status == "1") {
+            next({ path: '/nav_head/home' })  //如果登陆了,但进入login页面时,自动跳转到home页
+            return
+        }
         next();
     }
 
