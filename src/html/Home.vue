@@ -107,7 +107,7 @@ export default {
       }
     },
     async getData() {
-      let result = await this.$home({ methods: "get" }); //发起请求
+      let result = await this.$home({ method: "get" }); //发起请求
       this.user = result.data[0][0].user;
       this.newuser = result.data[3][0].newuser;
 

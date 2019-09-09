@@ -5,7 +5,6 @@ import store from './store'
 import axios from 'axios'
 
 Vue.prototype.$axios = axios;
-Vue.prototype.$store = store;
 
 const home = axios.create({  //私人订制
   baseURL: 'http://localhost:1906/home'
@@ -26,7 +25,7 @@ const login = axios.create({  //私人订制
   baseURL: 'http://localhost:1906/login'
 });
 
-
+Vue.prototype.$store = store;
 Vue.prototype.$home = home;
 Vue.prototype.$user = user;
 Vue.prototype.$order = order;
