@@ -61,7 +61,7 @@ export default {
       this.$login({
         //设置登陆状态为0
         method: "patch",
-        data: { status: 0 }
+        data: { status: "0" }
       });
       this.$router.push("/login");
     },

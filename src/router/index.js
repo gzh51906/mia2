@@ -100,9 +100,10 @@ router.beforeEach(async (to, from, next) => {  //路由拦截，没登陆不让�
     else {
         if (res.data[0].status == "1") {
             next({ path: '/nav_head/home' })  //如果登陆了,但进入login页面时,自动跳转到home页
-            return
+
+        } else {
+            next();
         }
-        next();
     }
 
 
