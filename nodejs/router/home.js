@@ -2,8 +2,8 @@ const express = require('express')
 const home = express.Router();
 const msyql = require('./content_db');
 home.get('/', async (req, res) => {
-    let date = new Date().toLocaleString().slice(0, 8) //当前时间 如2019-9-6
-    date = date.split('-').join("/");
+    let date = new Date().toLocaleString().split(' ') //当前时间 如2019-9-6
+    date = date[0].split('-').join("/");
     try {
         let res1 = await msyql("SELECT COUNT( username ) AS user FROM user"); //用username查看有多少用户
         let res2 = await msyql("SELECT COUNT(id) AS `order` FROM `order`");       //用id查看有多少订单
