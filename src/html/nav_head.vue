@@ -66,8 +66,8 @@ export default {
       statu = JSON.parse(statu.config.data).status;
       if (statu == "0") {
         this.$router.push("/login");
+        this.$forceUpdate();
       }
-      this.$forceUpdate();
     },
     goto(path) {
       path == this.$route.path ? "return" : this.$router.push(path);

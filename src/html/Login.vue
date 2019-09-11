@@ -61,8 +61,8 @@ export default {
 
       if (statu == "1") {
         this.$router.push("/nav_head/home");
+        this.$forceUpdate();
       }
-      this.$forceUpdate();
     }
   }
 };
