@@ -58,11 +58,11 @@ export default {
         data: { status: "1" }
       });
       statu = JSON.parse(statu.config.data).status;
+      this.$router.push("/nav_head/home");
 
-      if (statu == "1") {
-        this.$router.push("/nav_head/home");
-      }
-      this.$router.push("/login");
+      // if (statu == "1") {
+      //   this.$router.push("/nav_head/home");
+      // }
     }
   }
 };

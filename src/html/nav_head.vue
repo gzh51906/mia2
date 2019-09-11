@@ -64,10 +64,10 @@ export default {
         data: { status: "0" }
       });
       statu = JSON.parse(statu.config.data).status;
-      if (statu == "0") {
-        this.$router.push("/login");
-      }
-      this.$router.push("/nav_head/home");
+      this.$router.push("/login");
+      // if (statu == "0") {
+      //   this.$router.push("/login");
+      // }
     },
     goto(path) {
       path == this.$route.path ? "return" : this.$router.push(path);
