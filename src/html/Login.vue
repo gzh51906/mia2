@@ -46,20 +46,22 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       if (this.ruleForm.user != "admin" || this.ruleForm.pass != "123456") {
         alert("用户名或密码错误");
         return;
       }
 
-      // this.$store.commit("changeflag", "true");
-
-      this.$login({
+      let statu = await this.$login({
         //设置登陆状态为1
         method: "patch",
         data: { status: "1" }
       });
-      this.$router.push("/nav_head/home");
+      statu = JSON.parse(statu.config.data).status;
+
+      if (statu == "1") {
+        this.$router.push("/nav_head/home");
+      }
     }
   }
 };

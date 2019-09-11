@@ -124,7 +124,7 @@ export default {
   margin: 10px 0 0 20px;
 }
 .tabellist {
-  margin-left: 190px;
+  /* margin-left: 190px; */
   position: absolute;
   top: 50px;
   left: 130px;

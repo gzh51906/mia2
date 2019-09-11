@@ -56,14 +56,17 @@ export default {
     return {};
   },
   methods: {
-    logout() {
+    async logout() {
       // this.$store.commit("changeflag", "false");
-      this.$login({
+      let statu = await this.$login({
         //设置登陆状态为0
         method: "patch",
         data: { status: "0" }
       });
-      this.$router.push("/login");
+      statu = JSON.parse(statu.config.data).status;
+      if (statu == "0") {
+        this.$router.push("/login");
+      }
     },
     goto(path) {
       path == this.$route.path ? "return" : this.$router.push(path);
