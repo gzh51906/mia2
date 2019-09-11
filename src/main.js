@@ -8,22 +8,22 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$store = store;
 
 const home = axios.create({  //私人订制
-  baseURL: 'http://http://47.104.103.240:9601/home'
+  baseURL: 'http://47.104.103.240:9601/home'
 });
 const user = axios.create({  //私人订制
-  baseURL: 'http://http://47.104.103.240:9601/user'
+  baseURL: 'http://47.104.103.240:9601/user'
 });
 const order = axios.create({  //私人订制
-  baseURL: 'http://http://47.104.103.240:9601/order'
+  baseURL: 'http://47.104.103.240:9601/order'
 });
 const list = axios.create({  //私人订制
-  baseURL: 'http://http://47.104.103.240:9601/list'
+  baseURL: 'http://47.104.103.240:9601/list'
 });
 const add = axios.create({  //私人订制
-  baseURL: 'http://http://47.104.103.240:9601/add'
+  baseURL: 'http://47.104.103.240:9601/add'
 });
 const login = axios.create({  //私人订制
-  baseURL: 'http://http://47.104.103.240:9601/login'
+  baseURL: 'http://47.104.103.240:9601/login'
 });
 
 Vue.prototype.$home = home;
