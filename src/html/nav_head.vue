@@ -67,6 +67,7 @@ export default {
       if (statu == "0") {
         this.$router.push("/login");
       }
+      this.$forceUpdate();
     },
     goto(path) {
       path == this.$route.path ? "return" : this.$router.push(path);
