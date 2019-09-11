@@ -59,6 +59,6 @@
      ​	         其他的list都有对应的增删改查功能。增是在对应的页面点击添加跳到对应的页面，再输入数据，写     进数据库对应的表格。改是将其原本能容传到add页面，点击提交后进入数据库格与id查到对应的数据进行修改
 
      ​		<img  src="./head.png">
-     		<img  src="./png">		
+     		<img  src="./add.png">		
      		<img  src="./homelist.png">
 
